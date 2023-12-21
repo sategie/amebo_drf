@@ -16,6 +16,10 @@ class Profile(models.Model):
         return f'{self.user.username} Profile' 
 
 def create_profile(sender, instance, created, **kwargs):
+    """
+    Signal receiver which creates a new profile automatically each time
+    a new user instance is created
+    """
     if created:
         Profile.objects.create(user=instance)
 
