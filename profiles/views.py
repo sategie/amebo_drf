@@ -4,6 +4,7 @@ from .models import Profile
 from .serializers import ProfileSerializer
 from django.http import Http404
 from rest_framework import status
+from amebo_drf.permissions import IsOwnerOrReadOnly
 
 
 class ProfileList(APIView):
@@ -12,7 +13,7 @@ class ProfileList(APIView):
     """
     def get(self, request):
         profiles = Profile.objects.all()
-        serializer = ProfileSerializer(profiles, many= True)
+        serializer = ProfileSerializer(profiles, many= True, context= {'request' : request})
         return Response(serializer.data)
 
 
@@ -21,6 +22,8 @@ class ProfileDetail(APIView):
     View which handles the API requests for a single profile object
     """
     serializer_class = ProfileSerializer
+    permission_classes =[IsOwnerOrReadOnly]
+
 
     def get_object(self, pk):
         """
@@ -29,6 +32,7 @@ class ProfileDetail(APIView):
         """
         try:
             profile=Profile.objects.get(pk=pk)
+            self.check_object_permissions(self.request, profile)
             return profile
         except Profile.DoesNotExist:
             raise Http404
@@ -40,7 +44,7 @@ class ProfileDetail(APIView):
         Returns a response with the serialized profile data
         """
         profile = self.get_object(pk)
-        serializer=ProfileSerializer(profile)
+        serializer=ProfileSerializer(profile, context= {'request' : request})
         return Response(serializer.data)
 
     def put (self, request, pk):
@@ -50,7 +54,7 @@ class ProfileDetail(APIView):
 
         """
         profile =self.get_object(pk)
-        serializer=ProfileSerializer(profile, data=request.data)
+        serializer=ProfileSerializer(profile, data=request.data, context= {'request' : request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
