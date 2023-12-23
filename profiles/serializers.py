@@ -8,9 +8,10 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     Contains an own_profile field and method for authentication purposes
 
-    Contains a Meta class to provide further information to the 
+    Contains a Meta class to provide further information to 
     itself
     """
+    user = serializers.ReadOnlyField(source='user.username')
     own_profile = serializers.SerializerMethodField()
 
     def get_own_profile(self, obj):
@@ -27,4 +28,4 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['user', 'name', 'created_date', 'image', 'own_profile']
+        fields = ['id', 'user', 'name', 'created_date', 'image', 'own_profile']
