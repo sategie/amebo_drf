@@ -7,14 +7,20 @@ class LikeSerializer(serializers.ModelSerializer):
     Serializer class to handle the conversion of the like model instances 
     into JSON and back.
 
+    Contains a Meta class to provide further information to 
+    itself.
+
     Contains a create method to handle cases when a user tries to like a post
     more than once
 
-    Contains a Meta class to provide further information to 
-    itself.
     """
 
     user = serializers.ReadOnlyField(source='user.username')
+
+    class Meta:
+        model = Like
+        fields = ['id', 'user', 'post', 'created_date']
+
 
     def create(self, validated_data):
         try:
@@ -23,6 +29,3 @@ class LikeSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError({
                 'detail': 'You have already liked this post'
             })
-
-    class Meta:
-        fields = ['id', 'user', 'post', 'created_date']
