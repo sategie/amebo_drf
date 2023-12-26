@@ -7,10 +7,10 @@ class CommentSerializer(serializers.ModelSerializer):
     Serializer class to handle the conversion of the comment model instances 
     into JSON and back.
 
-    Contains an own_comment field and method for authentication purposes
+    Contains an own_comment field and method for authentication purposes.
 
     Contains a Meta class to provide further information to 
-    itself
+    itself.
 
     """
     user = serializers.ReadOnlyField(source='user.username')
