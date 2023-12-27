@@ -7,6 +7,9 @@ from .serializers import PostSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
 
 class PostList(APIView):
+    """
+    View which handles the listing and creation of new post objects
+    """
     serializer_class = PostSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly

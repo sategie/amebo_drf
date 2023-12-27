@@ -7,6 +7,9 @@ from .serializers import CommentSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
 
 class CommentList(APIView):
+    """
+    View which handles the listing and creation of new comment objects
+    """
     serializer_class = CommentSerializer
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly

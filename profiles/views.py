@@ -9,7 +9,7 @@ from amebo_drf.permissions import IsOwnerOrReadOnly
 
 class ProfileList(APIView):
     """
-    View which returns the profile instances in JSON format
+    View which handles the listing of new profile objects
     """
     def get(self, request):
         profiles = Profile.objects.all()

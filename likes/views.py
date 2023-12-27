@@ -7,6 +7,9 @@ from .serializers import LikeSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
 
 class LikeList(APIView):
+    """
+    View which handles the listing and creation of new like objects
+    """
     serializer_class = LikeSerializer    
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
