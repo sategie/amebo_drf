@@ -14,12 +14,30 @@ class NotificationList(APIView):
     serializer_class = NotificationSerializer
     permission_classes = [permissions.IsAuthenticated]
 
-    def get(self, request, format=None):
+    def get(self, request):
+        """
+        Fetches all notifications associated with the logged in user.
+
+        Marks the notifications as 'seen' using the update method.
+
+        Return the serialized data.
+        """
         notifications = Notification.objects.filter(user=request.user)
         serializer = NotificationSerializer(notifications, many=True)
+        notifications.update(seen=True)
+        
         return Response(serializer.data)
 
-    def post(self, request, format=None):
+    def post(self, request):
+        """
+        Gets a serialized notification instance.
+
+        Saves the notification to the database if valid.
+
+        Returns a HTTP 201 created message if valid.
+
+        Returns a HTTP 400 bad request message if invalid.
+        """
         serializer = NotificationSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
@@ -35,6 +53,12 @@ class NotificationDetail(APIView):
     serializer_class = NotificationSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
     def get_object(self, pk):
+        """
+        Retrieves a notification object from the database.
+
+        Raises an error if the notification does not exist
+
+        """
         try:
             notification = Notification.objects.get(pk=pk, user=self.request.user)
             self.check_object_permissions(self.request, notification)
@@ -42,12 +66,34 @@ class NotificationDetail(APIView):
         except Notification.DoesNotExist:
             raise Http404
 
-    def get(self, request, pk, format=None):
+    def get(self, request, pk):
+        """
+        Calls the get_object method to get the valid notification from the database.
+
+        Updates the seen attribute of the notification to True.
+
+        Saves the updated notification to the database.
+
+        Serializes the notification.
+
+        Returns the serialized data to the client as JSON.
+        """
         notification = self.get_object(pk)
+        notification.seen = True
+        notification.save(update_fields=['seen'])
+        
         serializer = NotificationSerializer(notification)
         return Response(serializer.data)
-        
-    def delete(self, request, pk, format=None):
+
+    def delete(self, request, pk):
+        """
+        Handles a DELETE request to the API for a particular notification.
+
+        Retrieves the notification instance and deletes it.
+
+        Returns a response showing that the notification has been deleted
+
+        """
         notification = self.get_object(pk)
         notification.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

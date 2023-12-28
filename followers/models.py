@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from notifications.models import Notification
+from django.db.models.signals import post_save
+
 
 class Follower(models.Model):
     """
@@ -28,6 +31,15 @@ class Follower(models.Model):
 
     def __str__(self):
         return f'{self.user} is following {self.followed_user}'
+
+
+def create_notification(sender, instance, created, **kwargs):
+    if created:
+        Notification.objects.create(
+            user=instance.followed_user,
+            message=f'{instance.user} started following you.'
+        )
+post_save.connect(create_notification, sender=Follower)
 
 
 
