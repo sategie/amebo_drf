@@ -14,9 +14,11 @@ class FollowerList(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
+        """
+        Fetches all followers associated with the logged in user.
         
-        # followers = Follower.objects.all()
-        # Retrieve only followers of the users the current user is following
+        Returns the serialized data.        
+        """
         user_following_ids = request.user.following.values_list('followed_user', flat=True)
         followers = Follower.objects.filter(followed_user__in=user_following_ids)
 
@@ -24,6 +26,15 @@ class FollowerList(APIView):
         return Response(serializer.data)
 
     def post(self, request):
+        """
+        Gets a serialized follower instance.
+
+        Saves the follower to the database if valid.
+
+        Returns a HTTP 201 created message if valid.
+
+        Returns a HTTP 400 bad request message if invalid.
+        """
         serializer = FollowerSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             # Prevent user from following themselves

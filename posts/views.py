@@ -16,14 +16,20 @@ class PostList(APIView):
         permissions.IsAuthenticated
     ]
 
-
     def get(self, request):
+        """
+        Fetches the ids of the users that are being followed by the current user.
 
-        # Fetches the ids of the users that are being followed by the current user
+        Include the current user's id in the list of users to fetch posts from.
+
+        Fetches the posts and filters them to include only those that belong to
+        followed users and the current user.
+
+        Returns the serialized data
+        """
+
         followed_users = Follower.objects.filter(user=request.user).values_list('followed_user', flat=True)
-        # Include the current user's id in the list of users to fetch posts from
         followed_users = list(followed_users) + [request.user.id]
-        # Filters the posts to include those that belong to followed users and the current user
         posts = Post.objects.filter(user__in=followed_users)
         serializer = PostSerializer(
             posts, many=True, context={'request': request}
@@ -32,6 +38,15 @@ class PostList(APIView):
 
 
     def post(self, request):
+        """
+        Gets a serialized post instance.
+
+        Saves the post to the database if valid.
+
+        Returns a HTTP 201 created message if valid.
+
+        Returns a HTTP 400 bad request message if invalid.
+        """
         serializer = PostSerializer(
             data=request.data, context ={'request': request}
         )

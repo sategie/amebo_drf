@@ -16,6 +16,11 @@ class CommentList(APIView):
     ]
 
     def get(self, request):
+        """
+        Fetches all comments
+
+        Returns the serialized data
+        """
         comments = Comment.objects.all()
         serializer = CommentSerializer(
             comments, many = True, context = {'request': request}

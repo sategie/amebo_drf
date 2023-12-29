@@ -14,11 +14,25 @@ class LikeList(APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
+        """
+        Fetches all likes.
+
+        Returns the serialized data.
+        """
         likes = Like.objects.all()
         serializer = LikeSerializer(likes, many=True, context={'request': request})
         return Response(serializer.data)
 
     def post(self, request):
+        """
+        Gets a serialized like instance.
+
+        Saves the like to the database if valid.
+
+        Returns a HTTP 201 created message if valid.
+
+        Returns a HTTP 400 bad request message if invalid.
+        """
         serializer = LikeSerializer(data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save(user=request.user)

@@ -14,6 +14,11 @@ class ProfileList(APIView):
     View which handles the listing of new profile objects
     """
     def get(self, request):
+        """
+        Fetches all profiles.
+
+        Returns the serialized data.
+        """
         profiles = Profile.objects.all()
         serializer = ProfileSerializer(profiles, many= True, context= {'request' : request})
         return Response(serializer.data)
@@ -53,7 +58,6 @@ class ProfileDetail(APIView):
         """
         Handles a PUT request to the API for a particular profile.
         
-
         """
         profile =self.get_object(pk)
         serializer=ProfileSerializer(profile, data=request.data, context= {'request' : request})
