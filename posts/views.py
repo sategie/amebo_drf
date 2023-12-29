@@ -3,6 +3,7 @@ from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Post
+from followers.models import Follower
 from .serializers import PostSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
 
@@ -12,16 +13,23 @@ class PostList(APIView):
     """
     serializer_class = PostSerializer
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly
+        permissions.IsAuthenticated
     ]
 
 
     def get(self, request):
-        posts = Post.objects.all()
+
+        # Fetches the ids of the users that are being followed by the current user
+        followed_users = Follower.objects.filter(user=request.user).values_list('followed_user', flat=True)
+        # Include the current user's id in the list of users to fetch posts from
+        followed_users = list(followed_users) + [request.user.id]
+        # Filters the posts to include those that belong to followed users and the current user
+        posts = Post.objects.filter(user__in=followed_users)
         serializer = PostSerializer(
-            posts, many = True, context = {'request': request}
+            posts, many=True, context={'request': request}
         )
         return Response(serializer.data)
+
 
     def post(self, request):
         serializer = PostSerializer(

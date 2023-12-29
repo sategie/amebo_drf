@@ -5,19 +5,16 @@ from rest_framework.response import Response
 from .models import Follower
 from .serializers import FollowerSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
-from rest_framework.exceptions import PermissionDenied
 
 class FollowerList(APIView):
     """
     View which handles the listing and creation of new follower objects
     """
     serializer_class = FollowerSerializer    
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
-        # Check if the user is authenticated
-        if not request.user.is_authenticated:
-            raise PermissionDenied({'detail': 'Please login to see followed users.'})
+        
         # followers = Follower.objects.all()
         # Retrieve only followers of the users the current user is following
         user_following_ids = request.user.following.values_list('followed_user', flat=True)
