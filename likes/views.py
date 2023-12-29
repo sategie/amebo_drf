@@ -11,7 +11,7 @@ class LikeList(APIView):
     View which handles the listing and creation of new like objects
     """
     serializer_class = LikeSerializer    
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
         likes = Like.objects.all()

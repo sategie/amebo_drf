@@ -12,7 +12,7 @@ class CommentList(APIView):
     """
     serializer_class = CommentSerializer
     permission_classes = [
-        permissions.IsAuthenticatedOrReadOnly
+        permissions.IsAuthenticated
     ]
 
     def get(self, request):
