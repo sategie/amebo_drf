@@ -28,22 +28,22 @@ class NotificationList(APIView):
         
         return Response(serializer.data)
 
-    def post(self, request):
-        """
-        Gets a serialized notification instance.
+    # def post(self, request):
+    #     """
+    #     Gets a serialized notification instance.
 
-        Saves the notification to the database if valid.
+    #     Saves the notification to the database if valid.
 
-        Returns a HTTP 201 created message if valid.
+    #     Returns a HTTP 201 created message if valid.
 
-        Returns a HTTP 400 bad request message if invalid.
-        """
-        serializer = NotificationSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save(user=request.user)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+    #     Returns a HTTP 400 bad request message if invalid.
+    #     """
+    #     serializer = NotificationSerializer(data=request.data)
+    #     if serializer.is_valid():
+    #         serializer.save(user=request.user)
+    #         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class NotificationDetail(APIView):

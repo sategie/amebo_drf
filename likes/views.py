@@ -52,7 +52,6 @@ class LikeDetail(APIView):
         Retrieves a like object from the database.
 
         Raises an error if the like does not exist
-
         """
         try:
             like = Like.objects.get(pk=pk)
