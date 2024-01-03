@@ -73,11 +73,17 @@ from .serializers import ProfileSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
 
 class ProfileList(generics.ListAPIView):
+    """
+    View which handles the listing of all profile objects
+    """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
+    """
+    View which handles the listing and updating of a single profile object
+    """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
     permission_classes =[IsOwnerOrReadOnly]
