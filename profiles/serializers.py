@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import Profile
+from posts.models import Post
+from followers.models import Follower
 
 class ProfileSerializer(serializers.ModelSerializer):
     """
@@ -13,6 +15,9 @@ class ProfileSerializer(serializers.ModelSerializer):
     """
     user = serializers.ReadOnlyField(source='user.username')
     own_profile = serializers.SerializerMethodField()
+    posts_count = serializers.SerializerMethodField()
+    followers_count = serializers.SerializerMethodField()
+    following_count = serializers.SerializerMethodField()
 
     def get_own_profile(self, obj):
         """
@@ -26,6 +31,18 @@ class ProfileSerializer(serializers.ModelSerializer):
         request = self.context['request']
         return request.user == obj.user
 
+    def get_posts_count(self, obj):
+        return Post.objects.filter(user=obj.user).count()
+
+    def get_followers_count(self, obj):
+        return Follower.objects.filter(followed_user=obj.user).count()
+
+    def get_following_count(self, obj):
+        return obj.user.following.count()
+
+
+
+
     class Meta:
         model = Profile
-        fields = ['id', 'user', 'name', 'created_date', 'image', 'own_profile']
+        fields = ['id', 'user', 'name', 'created_date', 'image', 'own_profile', 'posts_count', 'followers_count', 'following_count']

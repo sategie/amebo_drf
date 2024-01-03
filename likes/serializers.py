@@ -16,10 +16,14 @@ class LikeSerializer(serializers.ModelSerializer):
     """
 
     user = serializers.ReadOnlyField(source='user.username')
+    post_title = serializers.SerializerMethodField()
 
     class Meta:
         model = Like
-        fields = ['id', 'user', 'post', 'created_date']
+        fields = ['id', 'user', 'post', 'post_title', 'created_date']
+
+    def get_post_title(self, obj):
+        return obj.post.title
 
 
     def create(self, validated_data):
