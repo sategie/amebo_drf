@@ -17,6 +17,7 @@ class CommentSerializer(serializers.ModelSerializer):
     own_comment = serializers.SerializerMethodField()
     profile_id = serializers.ReadOnlyField(source='user.profile.id')
     profile_image = serializers.ReadOnlyField(source='user.profile.image.url')
+    post_title = serializers.CharField(read_only=True, source='post.title')
 
     def get_own_comment(self, obj):
         request = self.context['request']
@@ -24,5 +25,5 @@ class CommentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Comment
-        fields = ['id', 'user', 'own_comment', 'profile_id', 'profile_image', 'post', 'comment_content', 'created_date', 'updated_date']
+        fields = ['id', 'user', 'own_comment', 'profile_id', 'profile_image', 'post', 'comment_content', 'created_date', 'updated_date', 'post_title']
 
