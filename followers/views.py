@@ -1,9 +1,11 @@
-from rest_framework import status, permissions, generics, serializers
+from rest_framework import status, permissions, generics, serializers, filters
 from django.http import Http404
 from rest_framework.response import Response
 from .models import Follower
 from .serializers import FollowerSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 class FollowerList(generics.ListCreateAPIView):
     """
@@ -12,6 +14,13 @@ class FollowerList(generics.ListCreateAPIView):
     """
     serializer_class = FollowerSerializer    
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [
+     filters.OrderingFilter,
+     filters.SearchFilter,
+     DjangoFilterBackend
+]
+    search_fields = ['user__username', 'followed_user__username', 'created_date']
+    filterset_fields = ['user__username', 'followed_user', 'created_date']
 
     def get_queryset(self):
         """
