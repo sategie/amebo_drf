@@ -13,10 +13,11 @@ class ProfileList(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [
      filters.OrderingFilter,
-     DjangoFilterBackend
+     DjangoFilterBackend,
+    #  filters.SearchFilter
 ]
 filterset_fields = ['user__username', 'created_date']
-
+# search_fields = ['user__username', 'name']
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
