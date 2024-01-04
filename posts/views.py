@@ -19,7 +19,7 @@ class PostList(generics.ListCreateAPIView):
      filters.SearchFilter,
      DjangoFilterBackend
 ]
-    search_fields = ['title', 'user__username', 'post_content']
+    search_fields = ['title', 'user__username', 'created_date']
     filterset_fields = ['title', 'user__username', 'created_date']
 
     def get_queryset(self):
