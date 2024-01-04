@@ -1,9 +1,11 @@
-from rest_framework import status, permissions, generics
+from rest_framework import status, permissions, generics, filters
 from django.http import Http404
 from rest_framework.response import Response
 from .models import Notification
 from .serializers import NotificationSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 class NotificationList(generics.ListAPIView):
     """
@@ -12,6 +14,13 @@ class NotificationList(generics.ListAPIView):
     """
     serializer_class = NotificationSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [
+     filters.OrderingFilter,
+     filters.SearchFilter,
+     DjangoFilterBackend
+]
+    search_fields = ['message', 'user__username', 'created_date']
+    filterset_fields = ['seen', 'user__username']
 
     def get_queryset(self):
         """

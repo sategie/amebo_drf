@@ -20,7 +20,7 @@ class LikeList(generics.ListCreateAPIView):
      DjangoFilterBackend
 ]
     search_fields = ['user__username', 'post__title']
-    filterset_fields = ['user__username', 'created_date', 'post']
+    filterset_fields = ['user__username', 'post']
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

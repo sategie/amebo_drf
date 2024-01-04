@@ -19,7 +19,7 @@ class CommentList(generics.ListCreateAPIView):
      DjangoFilterBackend
 ]
     search_fields = ['user__username', 'created_date', 'post__title']
-    filterset_fields = ['user__username', 'post', 'created_date']
+    filterset_fields = ['user__username', 'post']
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

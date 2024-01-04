@@ -16,7 +16,7 @@ class ProfileList(generics.ListAPIView):
      DjangoFilterBackend,
     #  filters.SearchFilter
 ]
-filterset_fields = ['user__username', 'created_date']
+filterset_fields = ['user__username']
 # search_fields = ['user__username', 'name']
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):

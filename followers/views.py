@@ -20,7 +20,7 @@ class FollowerList(generics.ListCreateAPIView):
      DjangoFilterBackend
 ]
     search_fields = ['user__username', 'followed_user__username', 'created_date']
-    filterset_fields = ['user__username', 'followed_user', 'created_date']
+    filterset_fields = ['user__username', 'followed_user']
 
     def get_queryset(self):
         """
