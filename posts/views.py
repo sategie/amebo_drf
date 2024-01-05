@@ -1,5 +1,4 @@
 from rest_framework import generics, permissions, filters
-from django.http import Http404
 from .models import Post
 from followers.models import Follower
 from .serializers import PostSerializer
@@ -24,7 +23,7 @@ class PostList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         """
-        This view should return a list of all posts
+        Returns a list of all posts
         for the currently authenticated user.
         """
         followed_users = Follower.objects.filter(user=self.request.user).values_list('followed_user', flat=True)
@@ -45,21 +44,3 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsOwnerOrReadOnly]
-
-
-
-
-
-
-# Code below most likely not required
-    # def get_object(self):
-    #     """
-    #     Returns the object the view is displaying.
-    #     """
-    #     pk = self.kwargs.get('pk')
-    #     try:
-    #         post = Post.objects.get(pk=pk)
-    #         self.check_object_permissions(self.request, post)
-    #         return post
-    #     except Post.DoesNotExist:
-    #         raise Http404

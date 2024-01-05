@@ -1,6 +1,4 @@
 from rest_framework import status, permissions, generics, serializers, filters
-from django.http import Http404
-from rest_framework.response import Response
 from .models import Follower
 from .serializers import FollowerSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly

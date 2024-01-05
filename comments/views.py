@@ -1,5 +1,4 @@
 from rest_framework import generics, permissions, filters
-from django.http import Http404
 from .models import Comment
 from .serializers import CommentSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly

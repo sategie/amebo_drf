@@ -14,10 +14,8 @@ class ProfileList(generics.ListAPIView):
     filter_backends = [
      filters.OrderingFilter,
      DjangoFilterBackend,
-    #  filters.SearchFilter
 ]
 filterset_fields = ['user__username']
-# search_fields = ['user__username', 'name']
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     """

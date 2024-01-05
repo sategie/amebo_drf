@@ -24,14 +24,6 @@ class Like(models.Model):
 def __str__(self):
         return f'{self.user} likes {self.post}'
 
-# def create_like_notification(sender, instance, created, **kwargs):
-#     if created:
-#         Notification.objects.create(
-#             user=instance.post.user,
-#             message=f'{instance.user.username} liked your post.'
-#         )
-# post_save.connect(create_like_notification, sender=Like)
-
 @receiver(post_save, sender=Like)
 def create_like_notification(sender, instance, created, **kwargs):
     if created:

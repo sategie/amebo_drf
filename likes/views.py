@@ -1,6 +1,4 @@
 from rest_framework import status, permissions, generics, filters
-from django.http import Http404
-from rest_framework.response import Response
 from .models import Like
 from .serializers import LikeSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
@@ -19,7 +17,7 @@ class LikeList(generics.ListCreateAPIView):
      filters.SearchFilter,
      DjangoFilterBackend
 ]
-    search_fields = ['user__username', 'post__title']
+    search_fields = ['user__username', 'post__title', 'created_date']
     filterset_fields = ['user__username', 'post']
 
     def perform_create(self, serializer):
