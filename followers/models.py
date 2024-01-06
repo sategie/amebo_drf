@@ -34,6 +34,9 @@ class Follower(models.Model):
 
 
 def create_notification(sender, instance, created, **kwargs):
+    """
+    Signal which creates a notification when a user is followed by another user
+    """
     if created:
         Notification.objects.create(
             user=instance.followed_user,

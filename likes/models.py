@@ -26,6 +26,9 @@ def __str__(self):
 
 @receiver(post_save, sender=Like)
 def create_like_notification(sender, instance, created, **kwargs):
+    """
+    Signal which creates a notification when another user likes your post
+    """
     if created:
         Notification.objects.create(
             user=instance.post.user,

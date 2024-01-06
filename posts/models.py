@@ -21,6 +21,10 @@ class Post(models.Model):
 
 @receiver(post_save, sender=Post)
 def create_post_notification(sender, instance, created, **kwargs):
+    """
+    Signal which creates a notification for followers of a user
+    when the user posts a new content.
+    """
     if created:
         # Find all followers of the user who created the post
         followers = instance.user.followed_user.all()
