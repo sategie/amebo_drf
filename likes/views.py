@@ -9,9 +9,9 @@ class LikeList(generics.ListCreateAPIView):
     """
     View which lists all likes or creates a new like
     """
-    queryset = Like.objects.all()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = LikeSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    queryset = Like.objects.all()
     filter_backends = [
      filters.OrderingFilter,
      filters.SearchFilter,
