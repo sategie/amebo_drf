@@ -9,9 +9,9 @@ class CommentList(generics.ListCreateAPIView):
     """
     View which handles the listing of all comments and creation of a new comment
     """
-    queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Comment.objects.all()
     filter_backends = [
      filters.OrderingFilter,
      filters.SearchFilter,
