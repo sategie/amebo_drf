@@ -10,7 +10,7 @@ class ProfileList(generics.ListAPIView):
     """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsOwnerOrReadOnly]
     filter_backends = [
      filters.OrderingFilter,
      DjangoFilterBackend,
