@@ -9,10 +9,9 @@ class PostList(generics.ListCreateAPIView):
     """
     View which handles the listing and creation of new post objects
     """
+    queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [
-        permissions.IsAuthenticated
-    ]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [
      filters.OrderingFilter,
      filters.SearchFilter,
@@ -21,14 +20,19 @@ class PostList(generics.ListCreateAPIView):
     search_fields = ['title', 'user__username', 'created_date']
     filterset_fields = ['title', 'user__username']
 
-    def get_queryset(self):
-        """
-        Returns a list of all posts
-        for the currently authenticated user.
-        """
-        followed_users = Follower.objects.filter(user=self.request.user).values_list('followed_user', flat=True)
-        followed_users = list(followed_users) + [self.request.user.id]
-        return Post.objects.filter(user__in=followed_users)
+    # def get_queryset(self):
+    #     """
+    #     Returns a list of all posts
+    #     for the currently authenticated user.
+    #     """
+    #     try:
+    #         followed_users = Follower.objects.filter(user=self.request.user).values_list('followed_user', flat=True)
+    #         followed_users = list(followed_users) + [self.request.user.id]
+    #         return Post.objects.filter(user__in=followed_users)
+    #     except:
+    #         pass
+
+        
 
     def perform_create(self, serializer):
         """

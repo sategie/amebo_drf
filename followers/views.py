@@ -10,8 +10,9 @@ class FollowerList(generics.ListCreateAPIView):
     View which handles the listing of all follower objects and creation of a
     new follower
     """
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    queryset = Follower.objects.all()
     serializer_class = FollowerSerializer    
-    permission_classes = [permissions.IsAuthenticated]
     filter_backends = [
      filters.OrderingFilter,
      filters.SearchFilter,
@@ -20,12 +21,12 @@ class FollowerList(generics.ListCreateAPIView):
     search_fields = ['user__username', 'followed_user__username', 'created_date']
     filterset_fields = ['user__username', 'followed_user']
 
-    def get_queryset(self):
-        """
-        Fetches all followers associated with the logged in user.
-        """
-        user_following_ids = self.request.user.following.values_list('followed_user', flat=True)
-        return Follower.objects.filter(followed_user__in=user_following_ids)
+    # def get_queryset(self):
+    #     """
+    #     Fetches all followers associated with the logged in user.
+    #     """
+    #     user_following_ids = self.request.user.following.values_list('followed_user', flat=True)
+    #     return Follower.objects.filter(followed_user__in=user_following_ids)
 
     def perform_create(self, serializer):
         """
