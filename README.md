@@ -1,39 +1,77 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Amebo-drf
 
-Welcome,
+## Project Goals
+This project is the Django Rest Framework API for the [Amebo React web app](https://github.com/sategie/Amebo). 
 
-This is the Code Institute student template for Codeanywhere. If you are using Gitpod then you need [this template](https://github.com/Code-Institute-Org/gitpod-full-template) instead.  We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+It is designed to provide JSON data to the Amebo React web app.
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Codeanywhere and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **August 30th, 2023**
+## Data Models
+An Entity Relationship Diagram (ERD) was created and it is used to show the relationships between the database models.
 
-## Codeanywhere Reminders
+The relationships between the models are explained in terms of cardinality .i.e minimums and maximums .e.g What is the mimimum number of model A that can be associated with a single instance of model B, and what is the maximum number of model A that can be associated with a single instance of model B.
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere, in the terminal, type:
+The cardinality is then reversed between model B and model A .i.e What is the minimum number of model B that can be associated with a single instance of model A, and what is the maximum number of model B that can be associated with a single instance of model A.
 
-`python3 -m http.server`
+A total of 6 models were designed for this project (exluding the built-in User model which Django provides by default).
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+The custom models are explained below:
 
-To run a frontend (HTML, CSS, Javascript only) application in Codeanywhere with no-cache, you can use this alias for `python3 -m http.server`.
+### **Profile**
+This represents the profile of the user in the database.
+If the user associated with the profile is deleted, the corresponding profile is also deleted.
+This model has the following fields:
 
-`http_server`
+user: This has one to one relationship with the User model meaning that a user can only have one profile and one profile can only have one user
+name: This represents the name of the user and can be left blank if no name is provided
+created_date: A DateTime field showing when the profile was created
+image: This represents the profile picture of the user. If no profile picture is uploaded, a default profile picture is used
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+### **Post**
+This is the database model which stores the posts a user creates in the application.
+If the user(author of the post) is deleted, so also are the posts associated with the user.
+The model contains the following fields:
 
-A button should appear to click: _Open Preview_ or _Open Browser_.
+user: This has a foreign key relationship with the User model and represents the author of the post.
+title: This represents the title of the post
+post_content: This represents the content of the post
+image: This is an image field which handles how/where images are stored in the database. This field is not compulsory when creating a post .i.e null = True
+created_date: A DateTime field showing when the post was created
+updated_date: A DateTime field showing when the post was updated
 
-In Codeanywhere you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+### **Comment**
+This represents the comments on a particular post.
+If the user who created the comment is deleted, so also is the comment of the user.
+If the post associated with the comment is deleted, so also is the comment.
+The model has the following fields:
 
-To log into the Heroku toolbelt CLI:
+user: This has a foreign key relationship with the User model and represents the author of the comment
+post: This has a foreign key relationship with the Post model and represents the post which is commented on
+comment_content: This is a Text field which represents the actual content of the comment
+created_date: A DateTime field showing when the comment was created
+updated date: A DateTime field showing when the comment was updated
 
-1. Log in to your Heroku account and go to _Account Settings_ in the menu under your avatar.
-2. Scroll down to the _API Key_ and click _Reveal_
-3. Copy the key
-4. In Codeanywhere, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+### **Like**
+This represents the likes of a particular post.
+This model has the following fields:
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+user: This has a foreign key relationship with the User model
+post: This has a foreign key relationship with the Post model
+created_date: A DateTime field showing when the like occurred
 
----
+### **Follower**
+The follower model is used to represent the relationship when one user follows another user.
+It is set up so that you are not able to follow the same person twice and if the user is deleted, the associated follow relationship is also removed.
+This model has the following fields:
 
-Happy coding!
+user: This has a foreign key relationship with the User model and is used to represent the followers of the logged in user.
+followed_user: This also has a foreign key relationship with the User model and is used to represent the users who the logged in user is following.
+created_date: A DateTime field showing when the follow occurred
+
+### **Notification**
+The notification model is used to store messages for users. If a user is deleted, so also is the notification.
+This model has the following fields:
+
+user: This has a foreign key relationship with the User model. It has a related name 'notifications' which is used to specify the name of the reverse relationship from the default User model back to the Notification model
+message: The message field is a Charfield which stores the message content of the notification
+created_date: This is a DateTime field which records the date and time the notification was created
+seen: This is a Boolean field which changes from the default 'false' to 'true' when a user sees the notification

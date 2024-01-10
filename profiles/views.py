@@ -15,6 +15,7 @@ class ProfileList(generics.ListAPIView):
      filters.OrderingFilter,
      DjangoFilterBackend,
 ]
+
 filterset_fields = ['user__username']
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
