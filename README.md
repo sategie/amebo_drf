@@ -105,7 +105,7 @@ This model has the following fields:
 
 ## **API ENDPOINTS**
 
-| **PROFILES**      |                    |                                          |             |
+|**PROFILES**      |                    |                                          |             |
 |-------------------|--------------------|------------------------------------------|-------------|
 | HTTP              | URI                | CRUD OPERATION                           | VIEW NAME   |
 | GET               | /profiles          | List all profiles                        | List View   |
@@ -155,3 +155,57 @@ This model has the following fields:
 |                   |                    |                                          |             |
 | GET               | /notifications/:id | Get a specific notification by its ID    | Detail View |
 | DELETE            | /notifications/:id | Delete a specific notification by its ID | Detail View |
+
+## Frameworks, libraries and dependencies
+
+The Amebo-drf API was created using [Django](https://www.djangoproject.com) and [Django Rest Framework](https://django-filter.readthedocs.io/en/stable/).
+
+**Additional packages used:**
+
+### django-cloudinary-storage
+
+https://pypi.org/project/django-cloudinary-storage/
+
+Used to enable the storage of images on the Cloudinary platform
+
+### dj-allauth
+
+https://django-allauth.readthedocs.io/en/latest/
+
+This is used for user authentication.
+
+### dj-rest-auth
+
+https://dj-rest-auth.readthedocs.io/en/latest/introduction.html
+
+This provides REST API endpoints for login and logout functionality. This is not shown in the deployed backend API, because the functionality is implemented from the frontend Amebo React Web app.
+
+### djangorestframework-simplejwt
+
+https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
+
+Provides JSON web token authentication.
+
+### dj-database-url
+
+https://pypi.org/project/dj-database-url/
+
+Creates an environment variable to for the database configuration.
+
+### psycopg2
+
+https://pypi.org/project/psycopg2/
+
+This enables the interaction between Python and the PostgreSQL database.
+
+### django-filter
+
+https://django-filter.readthedocs.io/en/stable/
+
+This is used to create filters in the resource views
+
+### django-cors-headers
+
+https://pypi.org/project/django-cors-headers/
+
+This Django app adds Cross-Origin-Resource Sharing (CORS) headers to responses. It enables the API to respond to requests from origins other than its own host.
