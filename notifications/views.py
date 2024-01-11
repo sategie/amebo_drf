@@ -30,7 +30,7 @@ class NotificationList(generics.ListAPIView):
         queryset.update(seen=True)
         return queryset
 
-class NotificationDetail(generics.RetrieveUpdateDestroyAPIView):
+class NotificationDetail(generics.RetrieveDestroyAPIView):
     """
     View which handles the retrieving, updating and deleting of a notification
     """
@@ -43,8 +43,8 @@ class NotificationDetail(generics.RetrieveUpdateDestroyAPIView):
         """
         return Notification.objects.filter(user=self.request.user)
 
-    def perform_update(self, serializer):
-        """
-        Updates the seen attribute of the notification to True.
-        """
-        serializer.save(seen=True)
+    # def perform_update(self, serializer):
+    #     """
+    #     Updates the seen attribute of the notification to True.
+    #     """
+    #     serializer.save(seen=True)
