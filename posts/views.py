@@ -25,12 +25,16 @@ class PostList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         """
-        Check if a post with the same title already exists
+        Check if a post with the same title already exists (case insenstive).
 
-        Create a new post instance if it is not a duplicate title
+        Display a message informing that the user already has an existing post
+        with the same title.
+
+        Create a new post instance if it is not a duplicate title.
         """
-        if Post.objects.filter(title=serializer.validated_data['title'], user=self.request.user).exists():
-            raise ValidationError("You have already made a post with this title.")
+        title = serializer.validated_data['title'].lower()
+        if Post.objects.filter(title__iexact=title, user=self.request.user).exists():
+            raise ValidationError("You already have an existing post with this title")
         serializer.save(user=self.request.user)
 
 
