@@ -20,19 +20,6 @@ class PostList(generics.ListCreateAPIView):
     search_fields = ['title', 'user__username', 'created_date']
     filterset_fields = ['title', 'user__username']
 
-    # def get_queryset(self):
-    #     """
-    #     Returns a list of all posts
-    #     for the currently authenticated user.
-    #     """
-    #     try:
-    #         followed_users = Follower.objects.filter(user=self.request.user).values_list('followed_user', flat=True)
-    #         followed_users = list(followed_users) + [self.request.user.id]
-    #         return Post.objects.filter(user__in=followed_users)
-    #     except:
-    #         pass
-
-        
 
     def perform_create(self, serializer):
         """
