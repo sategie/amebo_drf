@@ -105,58 +105,53 @@ This model has the following fields:
 
 ## **API ENDPOINTS**
 
-| **PROFILES**
-|---------------|--------------------|------------------------------------------|-------------|
-| HTTP          | URI                | CRUD OPERATION                           | VIEW NAME   |
-| GET           | /profiles          | List all profiles                        | List View   |
-|               |                    |                                          |             |
-| GET           | /profiles/:id      | Get a specific profile by its ID         | Detail View |
-| PUT           | /profiles/:id      | Edit a specific profile by its ID        | Detail View |
-| DELETE        | /profiles/:id      | Delete a specific profile by its ID      | Detail View |
-|               |                    |                                          |             |
-| **POSTS**
-|---------------|--------------------|------------------------------------------|-------------|
-| HTTP          | URI                | CRUD OPERATION                           | VIEW NAME   |
-| GET           | /posts             | List all posts                           | List View   |
-| POST          | /posts             | Create new post                          | List View   |
-|               |                    |                                          |             |
-| GET           | /posts/:id         | Get a specific post by its ID            | Detail View |
-| PUT           | /posts/:id         | Edit a specific post by its ID           | Detail View |
-| DELETE        | /posts/:id         | Delete a specific post by its ID         | Detail View |
-|               |                    |                                          |             |
-| **COMMENTS**
-|---------------|--------------------|------------------------------------------|-------------|
-| HTTP          | URI                | CRUD OPERATION                           | VIEW NAME   |
-| GET           | /comments          | List all comments                        | List View   |
-| POST          | /comments          | Create new comment                       | List View   |
-|               |                    |                                          |             |
-| GET           | /comments/:id      | Get a specific comment by its ID         | Detail View |
-| PUT           | /comments/:id      | Edit a specific comment by its ID        | Detail View |
-| DELETE        | /comments/:id      | Delete a specific comment by its ID      | Detail View |
-|               |                    |                                          |             |
-| **LIKES**
-|---------------|--------------------|------------------------------------------|-------------|
-| HTTP          | URI                | CRUD OPERATION                           | VIEW NAME   |
-| GET           | /likes             | List all likes                           | List View   |
-| POST          | /likes             | Create new like                          | List View   |
-|               |                    |                                          |             |
-| GET           | /likes/:id         | Get a specific like by its ID            | Detail View |
-| PUT           | /likes/:id         | Edit a specific like by its ID           | Detail View |
-| DELETE        | /likes/:id         | Delete a specific like by its ID         | Detail View |
-|               |                    |                                          |             |
-| **FOLLOWERS**
-|---------------|--------------------|------------------------------------------|-------------|
-| HTTP          | URI                | CRUD OPERATION                           | VIEW NAME   |
-| GET           | /followers         | List all followers                       | List View   |
-| POST          | /followers         | Create new follower                      | List View   |
-|               |                    |                                          |             |
-| GET           | /followers/:id     | Get a specific follower by its ID        | Detail View |
-| DELETE        | /followers/:id     | Delete a specific follower by its ID     | Detail View |
-|               |                    |                                          |             |
-| **NOTIFICATIONS**
-|---------------|--------------------|------------------------------------------|-------------|
-| HTTP          | URI                | CRUD OPERATION                           | VIEW NAME   |
-| GET           | /notifications     | List all notifications                   | List View   |
-|               |                    |                                          |             |
-| GET           | /notifications/:id | Get a specific notification by its ID    | Detail View |
-| DELETE        | /notifications/:id | Delete a specific notification by its ID | Detail View |
+| **PROFILES**      |                    |                                          |             |
+|-------------------|--------------------|------------------------------------------|-------------|
+| HTTP              | URI                | CRUD OPERATION                           | VIEW NAME   |
+| GET               | /profiles          | List all profiles                        | List View   |
+|                   |                    |                                          |             |
+| GET               | /profiles/:id      | Get a specific profile by its ID         | Detail View |
+| PUT               | /profiles/:id      | Edit a specific profile by its ID        | Detail View |
+| DELETE            | /profiles/:id      | Delete a specific profile by its ID      | Detail View |
+|                   |                    |                                          |             |
+| **POSTS**         |                    |                                          |             |
+| HTTP              | URI                | CRUD OPERATION                           | VIEW NAME   |
+| GET               | /posts             | List all posts                           | List View   |
+| POST              | /posts             | Create new post                          | List View   |
+|                   |                    |                                          |             |
+| GET               | /posts/:id         | Get a specific post by its ID            | Detail View |
+| PUT               | /posts/:id         | Edit a specific post by its ID           | Detail View |
+| DELETE            | /posts/:id         | Delete a specific post by its ID         | Detail View |
+|                   |                    |                                          |             |
+| **COMMENTS**      |                    |                                          |             |
+| HTTP              | URI                | CRUD OPERATION                           | VIEW NAME   |
+| GET               | /comments          | List all comments                        | List View   |
+| POST              | /comments          | Create new comment                       | List View   |
+|                   |                    |                                          |             |
+| GET               | /comments/:id      | Get a specific comment by its ID         | Detail View |
+| PUT               | /comments/:id      | Edit a specific comment by its ID        | Detail View |
+| DELETE            | /comments/:id      | Delete a specific comment by its ID      | Detail View |
+|                   |                    |                                          |             |
+| **LIKES**         |                    |                                          |             |
+| HTTP              | URI                | CRUD OPERATION                           | VIEW NAME   |
+| GET               | /likes             | List all likes                           | List View   |
+| POST              | /likes             | Create new like                          | List View   |
+|                   |                    |                                          |             |
+| GET               | /likes/:id         | Get a specific like by its ID            | Detail View |
+| PUT               | /likes/:id         | Edit a specific like by its ID           | Detail View |
+| DELETE            | /likes/:id         | Delete a specific like by its ID         | Detail View |
+|                   |                    |                                          |             |
+| **FOLLOWERS**     |                    |                                          |             |
+| HTTP              | URI                | CRUD OPERATION                           | VIEW NAME   |
+| GET               | /followers         | List all followers                       | List View   |
+| POST              | /followers         | Create new follower                      | List View   |
+|                   |                    |                                          |             |
+| GET               | /followers/:id     | Get a specific follower by its ID        | Detail View |
+| DELETE            | /followers/:id     | Delete a specific follower by its ID     | Detail View |
+|                   |                    |                                          |             |
+| **NOTIFICATIONS** |                    |                                          |             |
+| HTTP              | URI                | CRUD OPERATION                           | VIEW NAME   |
+| GET               | /notifications     | List all notifications                   | List View   |
+|                   |                    |                                          |             |
+| GET               | /notifications/:id | Get a specific notification by its ID    | Detail View |
+| DELETE            | /notifications/:id | Delete a specific notification by its ID | Detail View |
