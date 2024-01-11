@@ -4,6 +4,8 @@ from followers.models import Follower
 from .serializers import PostSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.exceptions import ValidationError
+
 
 class PostList(generics.ListCreateAPIView):
     """
@@ -23,8 +25,12 @@ class PostList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         """
-        Create a new post instance.
+        Check if a post with the same title already exists
+
+        Create a new post instance if it is not a duplicate title
         """
+        if Post.objects.filter(title=serializer.validated_data['title'], user=self.request.user).exists():
+            raise ValidationError("You have already made a post with this title.")
         serializer.save(user=self.request.user)
 
 
