@@ -17,7 +17,7 @@ class NotificationList(generics.ListAPIView):
      filters.OrderingFilter,
      filters.SearchFilter,
      DjangoFilterBackend
-]
+    ]
     search_fields = ['message', 'user__username', 'created_date']
     filterset_fields = ['seen', 'user__username']
 
@@ -26,6 +26,7 @@ class NotificationList(generics.ListAPIView):
         Fetches all notifications associated with the logged in user.
         """
         return Notification.objects.filter(user=self.request.user)
+
 
 class NotificationDetail(generics.RetrieveDestroyAPIView):
     """
