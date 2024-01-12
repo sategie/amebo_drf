@@ -1,4 +1,4 @@
-# Amebo-drf
+# Amebo_drf
 
 ## Project Goals
 
@@ -15,6 +15,8 @@ The relationships between the models are explained in terms of cardinality .i.e 
 The cardinality is then reversed between model B and model A .i.e What is the minimum number of model B that can be associated with a single instance of model A, and what is the maximum number of model B that can be associated with a single instance of model A.
 
 A total of 6 models were designed for this project (exluding the built-in User model which Django provides by default).
+
+![Image of ERD](readme_media/amebo_drf_erd.png)
 
 The custom models are explained below:
 
