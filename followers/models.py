@@ -42,10 +42,6 @@ def create_notification(sender, instance, created, **kwargs):
             user=instance.followed_user,
             message=f'{instance.user} started following you.'
         )
+
+
 post_save.connect(create_notification, sender=Follower)
-
-
-
-
-
-

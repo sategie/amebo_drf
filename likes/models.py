@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from notifications.models import Notification
 
+
 class Like(models.Model):
     """
     Like model related to 'user' and 'post'.
@@ -21,8 +22,10 @@ class Like(models.Model):
         ordering = ['-created_date']
         unique_together = ['user', 'post']
 
+
 def __str__(self):
-        return f'{self.user} likes {self.post}'
+    return f'{self.user} likes {self.post}'
+
 
 @receiver(post_save, sender=Like)
 def create_like_notification(sender, instance, created, **kwargs):

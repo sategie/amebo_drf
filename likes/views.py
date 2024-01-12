@@ -16,13 +16,13 @@ class LikeList(generics.ListCreateAPIView):
      filters.OrderingFilter,
      filters.SearchFilter,
      DjangoFilterBackend
-]
+    ]
     search_fields = ['user__username', 'post__title', 'created_date']
     filterset_fields = ['user__username', 'post']
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
-        
+
 
 class LikeDetail(generics.RetrieveDestroyAPIView):
     """

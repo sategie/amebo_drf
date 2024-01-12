@@ -7,18 +7,22 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class FollowerList(generics.ListCreateAPIView):
     """
-    View which handles the listing of all followed user objects and creation of a
-    new follower
+    View which handles the listing of all followed user
+    objects and creation of a new follower
     """
     permission_classes = [permissions.IsAuthenticated]
     queryset = Follower.objects.all()
-    serializer_class = FollowerSerializer    
+    serializer_class = FollowerSerializer
     filter_backends = [
      filters.OrderingFilter,
      filters.SearchFilter,
      DjangoFilterBackend
-]
-    search_fields = ['user__username', 'followed_user__username', 'created_date']
+    ]
+    search_fields = [
+     'user__username',
+     'followed_user__username',
+     'created_date'
+    ]
     filterset_fields = ['user__username', 'followed_user']
 
     def get_queryset(self):
@@ -31,15 +35,16 @@ class FollowerList(generics.ListCreateAPIView):
         else:
             # Return an empty queryset if the user isn't authenticated
             return Follower.objects.none()
-    
-        
 
     def perform_create(self, serializer):
         """
-        Prevent user from following themselves and save the follower to the database if valid.
+        Prevent user from following themselves and save the follower
+        to the database if valid.
         """
         if serializer.validated_data.get('followed_user') == self.request.user:
-            raise serializers.ValidationError({'detail': 'You cannot follow yourself.'})
+            raise serializers.ValidationError({
+             'detail': 'You cannot follow yourself.'
+            })
         serializer.save(user=self.request.user)
 
 
