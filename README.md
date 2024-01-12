@@ -93,7 +93,7 @@ This model has the following fields:
 ### **Notification**
 
 The notification model is used to store messages for users. If a user is deleted, so also is the notification.
-Notifications are designed to be triggered when a user likes a post, follows another user or when a followed user posts new content.
+Notifications are designed to be triggered when a user likes a post, comments on a post, follows another user or when a followed user posts new content.
 This model has the following fields:
 
 **user**: This has a foreign key relationship with the User model. It has a related name 'notifications' which is used to specify the name of the reverse relationship from the default User model back to the Notification model
@@ -267,10 +267,11 @@ This is used to host the deployed application
 |                   | Seen/Unseen Notifications  | User opens the notification list                                                                                             | The unread notifications are marked as not seen                                                                | PASS   |
 |                   |                            | User opens a notification detail (Clicks on a particular notification)                                                       | The specific notification is marked as seen                                                                    | PASS   |
 |                   |                            |                                                                                                                              |                                                                                                                |        |
-|                   | Notifications: Likes       | User likes a post created by the logged in user                                                                              | The logged in user receives a notification of the new like                                                     | PASS   |
+|                   | Notifications: Likes       | A  like is made on the user's post                                                                                           | The user receives a notification of the new like                                                               | PASS   |
 |                   |                            |                                                                                                                              |                                                                                                                |        |
-|                   | Notifications: Follow      | A  user follows the logged in user                                                                                           | The logged in user receives a notification of the new follower                                                 | PASS   |
+|                   | Notifications: Follow      | A new follower event occurs                                                                                                  | The user receives a notification of the new follower                                                           | PASS   |
+|                   |                            |                                                                                                                              |                                                                                                                |        |
+|                   | Notifications: New Comment | A new comment is made on the user's post                                                                                     | The user receives a notification of the new comment                                                            | PASS   |
 |                   |                            |                                                                                                                              |                                                                                                                |        |
 |                   | Notifications: New Post    | The logged in user posts a new content                                                                                       | The followers of the logged in user who posted the content, get notifications that a new post was created      | PASS   |
-
 
