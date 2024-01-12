@@ -16,7 +16,9 @@ The cardinality is then reversed between model B and model A .i.e What is the mi
 
 A total of 6 models were designed for this project (exluding the built-in User model which Django provides by default).
 
-![Image of ERD](readme_media/amebo_drf_erd.png)
+<a href="readme_media/amebo_drf_erd.png" target="_blank">
+    <img src="readme_media/amebo_drf_erd.png" alt="Image of ERD">
+</a>
 
 The custom models are explained below:
 
