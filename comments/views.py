@@ -7,7 +7,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class CommentList(generics.ListCreateAPIView):
     """
-    View which handles the listing of all comments and creation of a new comment
+    View which handles the listing of all comments and creation
+    of a new comment
     """
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
@@ -16,12 +17,13 @@ class CommentList(generics.ListCreateAPIView):
      filters.OrderingFilter,
      filters.SearchFilter,
      DjangoFilterBackend
-]
+    ]
     search_fields = ['user__username', 'created_date', 'post__title']
     filterset_fields = ['user__username', 'post']
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     """

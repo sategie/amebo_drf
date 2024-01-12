@@ -40,7 +40,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = ['8000-sategie-amebo-drf-k106tt10yo.us2.codeanyapp.com',
-                
+
                  'amebo-drf-18f15fb7ee85.herokuapp.com', 'localhost']
 
 
@@ -88,8 +88,9 @@ REST_FRAMEWORK = {
         'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
 
-'DATETIME_FORMAT': '%d %b %Y'
-}
+    'DATETIME_FORMAT': '%d %b %Y'
+
+    }
 
 if 'DEV' not in os.environ:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
@@ -104,8 +105,9 @@ JWT_AUTH_SECURE = True
 JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
-REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER': 'amebo_drf.serializers.CurrentUserSerializer'}
-    
+REST_AUTH_SERIALIZERS = {'USER_DETAILS_SERIALIZER':
+                         'amebo_drf.serializers.CurrentUserSerializer'}
+
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -150,21 +152,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'amebo_drf.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-# if 'DEV' in os.environ:
-#      DATABASES = {
-#          'default': {
-#              'ENGINE': 'django.db.backends.sqlite3',
-#              'NAME': BASE_DIR / 'db.sqlite3',
-#          }
-#      }
-# else:
-#      DATABASES = {
-#          'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))   
-
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
@@ -176,16 +163,28 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'UserAttributeSimilarityValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'MinimumLengthValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'CommonPasswordValidator'
+        ),
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.'
+            'NumericPasswordValidator'
+        ),
     },
 ]
 
@@ -209,7 +208,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+STATICFILES_STORAGE = (
+    'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+)
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

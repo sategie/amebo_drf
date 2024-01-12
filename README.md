@@ -275,3 +275,10 @@ This is used to host the deployed application
 |                   |                            |                                                                                                                              |                                                                                                                |        |
 |                   | Notifications: New Post    | The logged in user posts a new content                                                                                       | The followers of the logged in user who posted the content, get notifications that a new post was created      | PASS   |
 
+## Validation
+
+The Python code used in the project was validated using the [Code Institute Python Linter](https://pep8ci.herokuapp.com/):
+
+Some lines exceeded the 79 character per line guideline, but these were corrected.
+
+No errors were found after the corrections were made.
