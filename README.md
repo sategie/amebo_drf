@@ -104,7 +104,7 @@ This model has the following fields:
 
 **seen**: This is a Boolean field which changes from the default 'false' to 'true' when a user opens the specific notification
 
-## **API ENDPOINTS**
+## API Endpoints
 
 |**PROFILES**         |                    |                                          |             |
 |-------------------|--------------------|------------------------------------------|-------------|
@@ -275,10 +275,54 @@ This is used to host the deployed application
 |                   |                            |                                                                                                                              |                                                                                                                |        |
 |                   | Notifications: New Post    | The logged in user posts a new content                                                                                       | The followers of the logged in user who posted the content, get notifications that a new post was created      | PASS   |
 
+### Known Bugs
+
+There are currently no known bugs in the API.
+
 ## Validation
 
 The Python code used in the project was validated using the [Code Institute Python Linter](https://pep8ci.herokuapp.com/):
 
 Some lines exceeded the 79 character per line guideline, but these were corrected.
 
-No errors were found after the corrections were made.
+No errors were found after the necessary corrections were made.
+
+## Deployment
+
+The Amebo_drf API is deployed to Heroku, using an ElephantSQL Postgres database.
+The deployment steps are as follows:
+
+- Login to Cloudinary.
+- Select the 'dashboard' option.
+- Copy the value of the 'API Environment variable' starting from `cloudinary://`.
+- Log in to Heroku.
+- Select 'Create new app' from the 'New' menu at the top right.
+- Enter a name for the app and select the appropriate region.
+- Select 'Create app'.
+- Select 'Settings' from the menu at the top.
+- Login to ElephantSQL.
+- Click 'Create new instance' on the dashboard.
+- Name the 'plan' and select the 'Tiny Turtle (free)' plan (or any other paid plans).
+- Choose 'select region'.
+- Choose the nearest data centre to your location.
+- Click 'Review'.
+- Go to the ElephantSQL dashboard and click on the 'database instance name' for this project.
+- Copy the ElephantSQL database URL to your clipboard (starts with `postgres://`).
+- Return to the Heroku dashboard.
+- Select the 'settings' tab.
+- Click the 'reveal config vars' option
+- Enter the following config var names and values:
+    - `CLOUDINARY_URL`: *your cloudinary URL as obtained above*
+    - `DATABASE_URL`: *your ElephantSQL postgres database URL as obtained above*
+    - `SECRET_KEY`: *your secret key*
+    - `ALLOWED_HOST`: *the url of your Heroku app (but without the `https://`)*
+- Select the 'Deploy' tab at the top.
+- Select 'GitHub' from the deployment options and confirm you wish to deploy using GitHub.
+- Find the 'Connect to GitHub' section and use the search box to locate and connect to your repo.
+- You may choose to automatically deploy your API each time you commit and push to Github
+- Find the 'Manual Deploy' section, choose 'main' as the branch to deploy and select 'Deploy Branch'.
+- Your API will be deployed after the build is successful
+
+## Credits
+
+- The idea for some of the resources used in the project was inspired by Code Institute's drf-API walkthrough project.
