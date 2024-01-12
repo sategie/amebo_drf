@@ -4,15 +4,15 @@ from comments.models import Comment
 from likes.models import Like
 from followers.models import Follower
 
+
 class PostSerializer(serializers.ModelSerializer):
     """
-    Serializer class to handle the conversion of the post model instances 
+    Serializer class to handle the conversion of the post model instances
     into JSON and back.
 
     Contains an own_post field and method for authentication purposes
 
-    Contains a Meta class to provide further information to 
-    itself
+    Contains a Meta class to provide further information to itself
     """
     user = serializers.ReadOnlyField(source='user.username')
     own_post = serializers.SerializerMethodField()
@@ -44,7 +44,10 @@ class PostSerializer(serializers.ModelSerializer):
         """
         return Follower.objects.filter(followed_user=obj.user).count()
 
-
     class Meta:
         model = Post
-        fields = ['id', 'user','own_post', 'profile_id', 'profile_image', 'title', 'post_content', 'image', 'created_date', 'updated_date', 'comments_count', 'likes_count', 'follower_count']
+        fields = [
+            'id', 'user', 'own_post', 'profile_id', 'profile_image',
+            'title', 'post_content', 'image', 'created_date', 'updated_date',
+            'comments_count', 'likes_count', 'follower_count'
+        ]

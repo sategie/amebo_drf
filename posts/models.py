@@ -4,6 +4,7 @@ from notifications.models import Notification
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+
 class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
@@ -14,7 +15,7 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_date']
-    
+
     def __str__(self):
         return self.title
 
@@ -31,5 +32,8 @@ def create_post_notification(sender, instance, created, **kwargs):
         for follower in followers:
             Notification.objects.create(
                 user=follower.user,
-                message=f"{instance.user.username} has created a new post: {instance.title}"
+                message=(
+                    f"{instance.user.username} has created a new post: "
+                    f"{instance.title}"
+                )
             )

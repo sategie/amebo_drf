@@ -18,10 +18,9 @@ class PostList(generics.ListCreateAPIView):
      filters.OrderingFilter,
      filters.SearchFilter,
      DjangoFilterBackend
-]
+    ]
     search_fields = ['title', 'user__username', 'created_date']
     filterset_fields = ['title', 'user__username']
-
 
     def perform_create(self, serializer):
         """
@@ -32,9 +31,14 @@ class PostList(generics.ListCreateAPIView):
 
         Create a new post instance if it is not a duplicate title.
         """
-        title = serializer.validated_data['title'].lower()
-        if Post.objects.filter(title__iexact=title, user=self.request.user).exists():
-            raise ValidationError("You already have an existing post with this title")
+        existing_post = Post.objects.filter(
+         title__iexact=title,
+         user=self.request.user
+        ).exists()
+        if existing_post:
+            raise ValidationError(
+             "You already have an existing post with this title"
+            )
         serializer.save(user=self.request.user)
 
 

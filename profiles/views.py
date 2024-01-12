@@ -4,6 +4,7 @@ from .serializers import ProfileSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 
+
 class ProfileList(generics.ListAPIView):
     """
     View which handles the listing of all profile objects
@@ -14,9 +15,11 @@ class ProfileList(generics.ListAPIView):
     filter_backends = [
      filters.OrderingFilter,
      DjangoFilterBackend,
-]
+    ]
+
 
 filterset_fields = ['user__username']
+
 
 class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
@@ -24,5 +27,4 @@ class ProfileDetail(generics.RetrieveUpdateAPIView):
     """
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
-    permission_classes =[IsOwnerOrReadOnly]
-
+    permission_classes = [IsOwnerOrReadOnly]
