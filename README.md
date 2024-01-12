@@ -106,7 +106,7 @@ This model has the following fields:
 
 ## **API ENDPOINTS**
 
-| **PROFILES**         |                    |                                          |             |
+|**PROFILES**         |                    |                                          |             |
 |-------------------|--------------------|------------------------------------------|-------------|
 | HTTP              | URI                | CRUD OPERATION                           | VIEW NAME   |
 | GET               | /profiles          | List all profiles                        | List View   |
