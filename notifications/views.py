@@ -1,4 +1,5 @@
 from rest_framework import status, permissions, generics, filters
+from rest_framework.response import Response
 from .models import Notification
 from .serializers import NotificationSerializer
 from amebo_drf.permissions import IsOwnerOrReadOnly
@@ -23,16 +24,12 @@ class NotificationList(generics.ListAPIView):
     def get_queryset(self):
         """
         Fetches all notifications associated with the logged in user.
-        Marks the notifications as 'seen' using the update method.
-        Return the queryset.
         """
-        queryset = Notification.objects.filter(user=self.request.user)
-        queryset.update(seen=True)
-        return queryset
+        return Notification.objects.filter(user=self.request.user)
 
 class NotificationDetail(generics.RetrieveDestroyAPIView):
     """
-    View which handles the retrieving, updating and deleting of a notification
+    View which handles retrieving and deleting a notification
     """
     serializer_class = NotificationSerializer
     permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
@@ -43,8 +40,13 @@ class NotificationDetail(generics.RetrieveDestroyAPIView):
         """
         return Notification.objects.filter(user=self.request.user)
 
-    # def perform_update(self, serializer):
-    #     """
-    #     Updates the seen attribute of the notification to True.
-    #     """
-    #     serializer.save(seen=True)
+    def retrieve(self, request, *args, **kwargs):
+        """
+        Marks the notification as seen only when it is retrieved in the detail
+        view.
+        """
+        instance = self.get_object()
+        instance.seen = True
+        instance.save(update_fields=['seen'])
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)

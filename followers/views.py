@@ -7,7 +7,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class FollowerList(generics.ListCreateAPIView):
     """
-    View which handles the listing of all follower objects and creation of a
+    View which handles the listing of all followed user objects and creation of a
     new follower
     """
     permission_classes = [permissions.IsAuthenticated]
@@ -23,11 +23,15 @@ class FollowerList(generics.ListCreateAPIView):
 
     def get_queryset(self):
         """
-        Fetches all followers associated with the logged in user.
+        Fetches all users the currently logged in user is following
         """
-        user_following_ids = self.request.user.following.values_list('followed_user', flat=True)
-        return Follower.objects.filter(followed_user__in=user_following_ids)
-            
+        if self.request.user.is_authenticated:
+            # User is authenticated, filter by logged in user's "following".
+            return Follower.objects.filter(user=self.request.user)
+        else:
+            # Return an empty queryset if the user isn't authenticated
+            return Follower.objects.none()
+    
         
 
     def perform_create(self, serializer):
