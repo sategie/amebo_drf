@@ -93,6 +93,7 @@ This model has the following fields:
 ### **Notification**
 
 The notification model is used to store messages for users. If a user is deleted, so also is the notification.
+Notifications are designed to be triggered when a user likes a post, follows another user or when a followed user posts new content.
 This model has the following fields:
 
 **user**: This has a foreign key relationship with the User model. It has a related name 'notifications' which is used to specify the name of the reverse relationship from the default User model back to the Notification model
@@ -101,7 +102,7 @@ This model has the following fields:
 
 **created_date**: This is a DateTime field which records the date and time the notification was created
 
-**seen**: This is a Boolean field which changes from the default 'false' to 'true' when a user sees the notification
+**seen**: This is a Boolean field which changes from the default 'false' to 'true' when a user opens the specific notification
 
 ## **API ENDPOINTS**
 

@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from notifications.models import Notification
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from posts.models import Post
 
 class Comment(models.Model):
@@ -18,3 +21,15 @@ class Comment(models.Model):
   
     def __str__(self):
         return self.comment_content
+
+@receiver(post_save, sender=Comment)
+def create_comment_notification(sender, instance, created, **kwargs):
+    """
+    Signal which creates a notification when a new comment is made
+    on the user's own post
+    """
+    if created:
+        Notification.objects.create(
+            user=instance.post.user,
+            message=f"{instance.user.username} commented on '{instance.post.title}'",
+        )
