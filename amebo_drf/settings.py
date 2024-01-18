@@ -127,7 +127,7 @@ if 'CLIENT_ORIGIN' in os.environ:
 
 if 'CLIENT_ORIGIN_DEV' in os.environ:
     CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://3000-sategie-amebo-vrixpcxd3b.us2.codeanyapp.com/",
+        r"^https://3000-sategie-amebo-vrixpcxd3b.us2.codeanyapp.com",
     ]
 
 CORS_ALLOW_CREDENTIALS = True
