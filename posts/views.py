@@ -32,7 +32,7 @@ class PostList(generics.ListCreateAPIView):
         Create a new post instance if it is not a duplicate title.
         """
         existing_post = Post.objects.filter(
-         title__iexact=title,
+         title__iexact=self.request.data.get("title"),
          user=self.request.user
         ).exists()
         if existing_post:
