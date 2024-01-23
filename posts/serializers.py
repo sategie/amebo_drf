@@ -19,6 +19,7 @@ class PostSerializer(serializers.ModelSerializer):
     profile_id = serializers.ReadOnlyField(source='user.profile.id')
     profile_image = serializers.ReadOnlyField(source='user.profile.image.url')
     comments_count = serializers.SerializerMethodField()
+    like_id = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
     follower_count = serializers.SerializerMethodField()
 
@@ -32,6 +33,19 @@ class PostSerializer(serializers.ModelSerializer):
         """
         return Comment.objects.filter(post=obj).count()
 
+    def get_like_id(self, obj):
+        """
+        Retrieves the ID of the like associated with the current post and 
+        logged-in user.
+
+        Returns none if no likes are found
+        """
+        request = self.context.get('request')
+        if request and hasattr(request, 'user'):
+            like = Like.objects.filter(post=obj, user=request.user).first()
+            return like.id if like else None
+        return None
+
     def get_likes_count(self, obj):
         """
         Returns the total number of likes on the post
@@ -44,10 +58,11 @@ class PostSerializer(serializers.ModelSerializer):
         """
         return Follower.objects.filter(followed_user=obj.user).count()
 
+
     class Meta:
         model = Post
         fields = [
             'id', 'user', 'own_post', 'profile_id', 'profile_image',
             'title', 'post_content', 'image', 'created_date', 'updated_date',
-            'comments_count', 'likes_count', 'follower_count'
+            'comments_count', 'likes_count', 'like_id', 'follower_count'
         ]

@@ -2,7 +2,7 @@
 
 ## Project Goals
 
-This project is the Django Rest Framework API for the [Amebo React web app](https://github.com/sategie/Amebo). 
+This project is the Django Rest Framework API for the [Amebo React web app](https://github.com/sategie/Amebo).
 
 It is designed to provide JSON data to the Amebo React web app.
 
@@ -108,8 +108,8 @@ This model has the following fields:
 
 ## API Endpoints
 
-|**PROFILES**         |                    |                                          |             |
-|-------------------|--------------------|------------------------------------------|-------------|
+| **PROFILES**      |                    |                                          |             |
+| ----------------- | ------------------ | ---------------------------------------- | ----------- |
 | HTTP              | URI                | CRUD OPERATION                           | VIEW NAME   |
 | GET               | /profiles          | List all profiles                        | List View   |
 |                   |                    |                                          |             |
@@ -216,16 +216,19 @@ This Django app adds Cross-Origin-Resource Sharing (CORS) headers to responses. 
 ### Third Party Software
 
 #### Cloudinary
+
 https://cloudinary.com/
 
 This is used to store the uploaded images in the project
 
 #### ElephantSQL
+
 https://www.elephantsql.com/
 
 This is used to manage the PostgreSQL database used in the project
 
 #### Heroku
+
 https://www.heroku.com/
 
 This is used to host the deployed application
@@ -233,7 +236,7 @@ This is used to host the deployed application
 ## Manual Testing
 
 | RESOURCE          | TEST                       | TEST ACTION                                                                                                                  | EXPECTED OUTCOME                                                                                               | RESULT |
-|-------------------|----------------------------|------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------|--------|
+| ----------------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------ |
 | **POSTS**         | CRUD Post                  | User accesses posts resource without authenticating                                                                          | User can read post, but has no option to create, update or delete a post                                       | PASS   |
 |                   |                            | User accesses posts resource after authenticating                                                                            | User can read a post, create, update and delete a post                                                         | PASS   |
 |                   |                            |                                                                                                                              |                                                                                                                |        |
@@ -252,7 +255,7 @@ This is used to host the deployed application
 |                   | Duplicate Like             | A user attempts to like a post they have already liked                                                                       | A message appears informing that the user has already liked the post                                           | PASS   |
 |                   |                            |                                                                                                                              |                                                                                                                |        |
 |                   | Likes Count                | User likes a post                                                                                                            | The likes count on the post is increased by 1                                                                  | PASS   |
-|                   |                            | User unlikes a post                                                                                                          | The likes count  on the post is decreased by 1                                                                 | PASS   |
+|                   |                            | User unlikes a post                                                                                                          | The likes count on the post is decreased by 1                                                                  | PASS   |
 |                   |                            |                                                                                                                              |                                                                                                                |        |
 | **PROFILES**      | Read/Update/Delete Profile | User accesses the profiles resource without authenticating                                                                   | User can view the profile, but has no option to update or delete a profile                                     | PASS   |
 |                   |                            | User accesses the profiles resource after authenticating                                                                     | User can view the profile, update(Name/Image) or delete their own profile                                      | PASS   |
@@ -269,7 +272,7 @@ This is used to host the deployed application
 |                   | Seen/Unseen Notifications  | User opens the notification list                                                                                             | The unread notifications are marked as not seen                                                                | PASS   |
 |                   |                            | User opens a notification detail (Clicks on a particular notification)                                                       | The specific notification is marked as seen                                                                    | PASS   |
 |                   |                            |                                                                                                                              |                                                                                                                |        |
-|                   | Notifications: Likes       | A  like is made on the user's post                                                                                           | The user receives a notification of the new like                                                               | PASS   |
+|                   | Notifications: Likes       | A like is made on the user's post                                                                                            | The user receives a notification of the new like                                                               | PASS   |
 |                   |                            |                                                                                                                              |                                                                                                                |        |
 |                   | Notifications: Follow      | A new follower event occurs                                                                                                  | The user receives a notification of the new follower                                                           | PASS   |
 |                   |                            |                                                                                                                              |                                                                                                                |        |
@@ -314,10 +317,10 @@ The deployment steps are as follows:
 - Select the 'settings' tab.
 - Click the 'reveal config vars' option
 - Enter the following config var names and values:
-    - `CLOUDINARY_URL`: *your cloudinary URL as obtained above*
-    - `DATABASE_URL`: *your ElephantSQL postgres database URL as obtained above*
-    - `SECRET_KEY`: *your secret key*
-    - `ALLOWED_HOST`: *the url of your Heroku app (but without the `https://`)*
+  - `CLOUDINARY_URL`: _your cloudinary URL as obtained above_
+  - `DATABASE_URL`: _your ElephantSQL postgres database URL as obtained above_
+  - `SECRET_KEY`: _your secret key_
+  - `ALLOWED_HOST`: _the url of your Heroku app (but without the `https://`)_
 - Select the 'Deploy' tab at the top.
 - Select 'GitHub' from the deployment options and confirm you wish to deploy using GitHub.
 - Find the 'Connect to GitHub' section and use the search box to locate and connect to your repo.
