@@ -35,15 +35,21 @@ class PostSerializer(serializers.ModelSerializer):
 
     def get_like_id(self, obj):
         """
-        Retrieves the ID of the like associated with the current post and 
+        Retrieves the ID of the like associated with the current post and
         logged-in user.
 
-        Returns none if no likes are found
+        Returns None if no likes are found.
         """
         request = self.context.get('request')
-        if request and hasattr(request, 'user'):
-            like = Like.objects.filter(post=obj, user=request.user).first()
-            return like.id if like else None
+        like = None
+        if (request and
+            hasattr(request, 'user') and
+           request.user.is_authenticated):
+            like = Like.objects.filter(
+                post=obj,
+                user=request.user
+            ).first()
+        return like.id if like else None
         return None
 
     def get_likes_count(self, obj):
@@ -57,7 +63,6 @@ class PostSerializer(serializers.ModelSerializer):
         Returns the total number of followers of the user who created the post
         """
         return Follower.objects.filter(followed_user=obj.user).count()
-
 
     class Meta:
         model = Post
