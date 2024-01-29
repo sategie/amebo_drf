@@ -36,9 +36,20 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_posts_count(self, obj):
         return Post.objects.filter(user=obj.user).count()
 
+    # def get_following_id(self, obj):
+    #     following = Follower.objects.filter(user=obj.user).first()
+    #     return following.followed_user_id if following else None
+
     def get_following_id(self, obj):
-        following = Follower.objects.filter(user=obj.user).first()
-        return following.followed_user_id if following else None
+        request = self.context['request']
+        user = request.user
+        if user.is_authenticated:
+            following = Follower.objects.filter(
+                user=user, followed_user=obj.user
+            ).first()
+            print(following)
+            return following.id if following else None
+        return None
 
     def get_followers_count(self, obj):
         return Follower.objects.filter(followed_user=obj.user).count()
