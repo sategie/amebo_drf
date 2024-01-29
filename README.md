@@ -115,7 +115,6 @@ This model has the following fields:
 |                   |                    |                                          |             |
 | GET               | /profiles/:id      | Get a specific profile by its ID         | Detail View |
 | PUT               | /profiles/:id      | Edit a specific profile by its ID        | Detail View |
-| DELETE            | /profiles/:id      | Delete a specific profile by its ID      | Detail View |
 |                   |                    |                                          |             |
 | **POSTS**         |                    |                                          |             |
 | HTTP              | URI                | CRUD OPERATION                           | VIEW NAME   |

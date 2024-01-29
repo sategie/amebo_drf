@@ -41,7 +41,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-sategie-amebo-drf-k106tt10yo.us2.codeanyapp.com',
+ALLOWED_HOSTS = ['8000-sategie-amebo-drf-wsvpnnkmi2.us2.codeanyapp.com',
 
                  'amebo-drf-18f15fb7ee85.herokuapp.com', 'localhost']
 

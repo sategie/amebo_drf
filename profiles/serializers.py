@@ -16,6 +16,7 @@ class ProfileSerializer(serializers.ModelSerializer):
     """
     user = serializers.ReadOnlyField(source='user.username')
     own_profile = serializers.SerializerMethodField()
+    following_id = serializers.SerializerMethodField()
     posts_count = serializers.SerializerMethodField()
     followers_count = serializers.SerializerMethodField()
     following_count = serializers.SerializerMethodField()
@@ -35,6 +36,9 @@ class ProfileSerializer(serializers.ModelSerializer):
     def get_posts_count(self, obj):
         return Post.objects.filter(user=obj.user).count()
 
+    def get_following_id(self, obj):
+        return obj.user.following.values_list('followed_user__id', flat=True)
+
     def get_followers_count(self, obj):
         return Follower.objects.filter(followed_user=obj.user).count()
 
@@ -45,5 +49,5 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = [
          'id', 'user', 'name', 'created_date', 'image',
-         'own_profile', 'posts_count', 'followers_count', 'following_count'
+         'own_profile', 'posts_count', 'following_id', 'followers_count', 'following_count'
         ]
