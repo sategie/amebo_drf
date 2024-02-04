@@ -2,7 +2,7 @@
 
 ## Project Goals
 
-This project is the Django Rest Framework API for the [Amebo React web app](https://github.com/sategie/Amebo).
+This project is the backend Django Rest Framework API for the [Amebo](https://github.com/sategie/Amebo) React frontend app.
 
 It is designed to provide JSON data to the Amebo React web app.
 
@@ -326,6 +326,41 @@ The deployment steps are as follows:
 - You may choose to automatically deploy your API each time you commit and push to Github
 - Find the 'Manual Deploy' section, choose 'main' as the branch to deploy and select 'Deploy Branch'.
 - Your API will be deployed after the build is successful
+
+### How to Fork the Repository
+
+- You can make a copy of the project by doing the following:
+
+    1. Go to the project's Github repository: [Amebo_drf](https://github.com/sategie/amebo_drf)
+
+    2. Click on the *Fork* button on the top right of the screen.
+
+- Note: Changes made here do not affect the original repository
+
+### How to Clone the Repository
+
+- The repository can be cloned by doing the following:
+
+    1. Go to the project's Github repository: [Amebo_drf](https://github.com/sategie/amebo_drf)
+
+    2. Click the green *Code* button on the right.
+
+    3. Click on *HTTPS* and copy the link.
+
+    4. Open Git and change the working directory to where you want to have the cloned directory.
+
+    5. Type *git clone* and paste the copied URL.
+
+- You can make changes to the project by doing the following:
+
+    1. Type *git add .*
+
+    2. Type *git commit -m* and add a short comment within quotes .e.g git commit -m "This is a short comment example"
+
+    3. Type *git push* to push the changes to the repository
+
+- Note: Any update committed to the main branch immediately reflects in the hosted site.
+
 
 ## Credits
 
