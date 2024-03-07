@@ -40,7 +40,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 
 
-ALLOWED_HOSTS = ['8000-sategie-amebo-drf-wsvpnnkmi2.us2.codeanyapp.com',
+ALLOWED_HOSTS = ['8000-sategie-amebo-drf-mens9oemkt.us1.codeanyapp.com',
 
                  'amebo-drf-18f15fb7ee85.herokuapp.com', 'localhost']
 
@@ -128,7 +128,7 @@ if 'CLIENT_ORIGIN' in os.environ:
 
 if 'CLIENT_ORIGIN_DEV' in os.environ:
     CORS_ALLOWED_ORIGIN_REGEXES = [
-        r"^https://3001-sategie-amebo-u8latp9lds.us2.codeanyapp.com",
+        r"^https://3000-sategie-amebo-jjqj3xk1x9.us1.codeanyapp.com",
     ]
 
 CORS_ALLOW_CREDENTIALS = True
